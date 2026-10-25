@@ -1,6 +1,20 @@
 from colorama import Fore, Style
+from platformdirs import user_data_dir
+
+
+data_dir = user_data_dir("TicTacToeML", "Hikuji")
+settings_dir = data_dir + "/settings"
+ai_memory_dir = data_dir + "/ai_memory"
+
+settings_file = settings_dir + "/settings.json"
+stats_file = data_dir + "/stats.json"
+
+dirs = [settings_dir, ai_memory_dir]
+files = [settings_file, stats_file]
+
 
 reset = Fore.WHITE + Style.BRIGHT
+
 
 board = [
     [
