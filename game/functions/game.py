@@ -1,3 +1,5 @@
+from .display import clear
+import colorama
 
 
 # Helper functions #
@@ -6,30 +8,39 @@
 
 # Game functions #
 
-def get_symbol():
+def get_symbol(error):
     """
         Prompts the player to choose their symbol (X or O) and returns the chosen symbol in uppercase.
 
         Returns:
             str: The symbol chosen by the player, either 'X' or 'O'.
+            error (int): error hendler
     """
 
     while True:
-        symbol = input("Choose your symbol (X or O): ").upper()
+        clear()
+        print(f"Choose your symbol ({colorama.Style.BRIGHT}X{colorama.Style.RESET_ALL} or {colorama.Style.BRIGHT}O{colorama.Style.RESET_ALL})")
+
+        if error == 1:
+            print(f"{colorama.Fore.RED}Invalid input. {colorama.Style.BRIGHT}Please choose either X or O.{colorama.Style.RESET_ALL}")
+        error = 0
+
+        symbol = input(">>> ").upper()
 
         if symbol in ["X", "O"]:
             return symbol
         
         else:
-            print("Invalid input. Please choose either X or O.")
+            error = 1
 
 
-def get_move(board):
+def get_move(board, error):
     """
         Prompts the player to enter their move (a number between 1 and 9) and returns the corresponding index in the game board (a number between 0 and 8).
 
         Args:
             board (list): The game board.
+            error (int): error hendler
 
         Returns:
             int: The index of the chosen move in the game board (a number between 0 and 8).
@@ -37,16 +48,25 @@ def get_move(board):
 
     while True:
         try:
-            move = int(input("Enter your move. Choose from 1 to 9: ")) - 1
+            clear()
+            print("Enter your move. Choose a number from 1 to 9.")
 
-            if move in range(9) and type(board[move]) == int:
+            if error == 1 :
+                print(f"{colorama.Fore.RED}Invalid input. {colorama.Style.BRIGHT}Please enter a number between 1 and 9.{colorama.Style.RESET_ALL}")
+            elif error == 2:
+                print(f"{colorama.Fore.RED}Invalid moove. {colorama.Style.BRIGHT}Please choose an empty cell between 1 and 9.{colorama.Style.RESET_ALL}")
+            error = 0
+
+            move = int(input(">>> ")) - 1
+
+            if 0 >= move <= 8 and board[move] not in ["X", "O"]:
                 return move
             
             else:
-                print("Invalid move. Please choose an empty cell between 1 and 9.")
+                error = 2
 
         except ValueError:
-            print("Invalid input. Please enter a number between 1 and 9.")
+            error = 1
 
 
 def check_board(board):
@@ -71,6 +91,6 @@ def check_board(board):
             return board[combo[0]]
 
     if all(isinstance(cell, str) for cell in board):
-        return "Draw"
+        return "draw"
 
     return None

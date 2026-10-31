@@ -38,6 +38,14 @@ def create_stats_file():
         with open(file, "w") as f:
             dump(json_data, f, indent=4)
 
+
+def create_settings_file():
+    pass
+
+
+def create_memory_file():
+    pass
+
 # data functions #
 
 def setup():

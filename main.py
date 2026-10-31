@@ -1,63 +1,120 @@
-import colorama
-import signal
 
+import colorama
+
+import game.data.base as data
+import game.functions.game as game
 import game.functions.display as display
 from game.functions.data import setup
 
-## 0 - game mode, 1 - can open settings, 2 - run settings 3 - error message ##
-mode_cache = ["WELCOME", True, False, False]
-# signal.signal(signal.SIGINT, )
-
 
 def main():
-    global mode_cache
+    ## 0 - game mode, 1 - error message##
+    mode = "WELCOME"
+    error = 0
+    symbol = ""
+    game_data = []
+
+    board = data.Board()
+
 
     setup()
 
     while True:
-        if mode_cache[0] == "WELCOME":
-            display.welcome()
-            mode_cache[0:2] = "MENU", True
+        match mode:
+            case "WELCOME":
+                display.welcome()
+                mode = "MENU"
 
-        elif mode_cache[0] == "MENU":
-            while True:
-                display.menu()
-                if mode_cache[3]:
-                    print(f"{colorama.Fore.RED}Invalid input. {colorama.Style.BRIGHT}Please choose a valid option (1-3).{colorama.Style.RESET_ALL}")
-                    mode_cache[3] = False
+            case "MENU":
+                while True:
+                    display.menu()
+                    if error == 1:
+                        print(f"{colorama.Fore.RED}Invalid input. {colorama.Style.BRIGHT}Please choose a valid option (1-3).{colorama.Style.RESET_ALL}")
+                        error = 0
 
-                try:
-                    choice = int(input(">>> "))
-            
-                    if choice not in [1, 2, 3]:
-                        raise ValueError
-            
-                except ValueError:
-                    mode_cache[3] = True
+                    try:
+                        choice = int(input(">>> "))
+                
+                        if choice not in range(1, 6):
+                            raise ValueError
+                
+                    except ValueError:
+                        error = 1
+                        continue
+
+                    match choice:
+                        case 1:
+                            mode = "GAME"
+                            break
+
+                        case 2:
+                            mode = "RULES"
+                            break
+
+                        case 3:
+                            mode = "STATS"
+                            break
+
+                        case 5:
+                            mode = "CONFIRM_EXIT"
+                            break
+
+            case "GAME":
+                display.clear()
+                symbol = game.get_symbol(error)
+
+                if symbol == "X":
+                    mode = "PLAYER"
+
+                else:
+                    mode = "AI"
+
+            case "PLAYER":
+                display.clear()
+                print(f"{colorama.Style.BRIGHT}Your turn.{colorama.Style.RESET_ALL}")
+                move = game.get_move(board.board[1], error)
+                board.board[1][move] = symbol
+
+                status = game.check_board(board.board[1])
+
+                if status == symbol:
+                    mode = "WIN - PLAYER"
                     continue
 
-                if choice == 1:
-                    mode_cache[0:2] = "GAME", True
-                    break
+                elif status == "draw":
+                    mode = "DRAW"
+                    continue
 
-                elif choice == 2:
-                    mode_cache[0:2]  = "STATS", True
-                    break
+                mode = "AI"
 
-                elif choice == 3:
-                    mode_cache[0:2] = "EXIT", False
-                    break
+            case "AI":
+                pass
 
-        elif mode_cache[0] == "GAME":
-            pass
+            case "RULES":
+                display.rules()
+                mode = "MENU"
 
-        elif mode_cache[0] == "STATS":
-            display.stats()
-            mode_cache[0:2] = "MENU", True
+            case "STATS":
+                display.stats()
+                mode = "MENU"
 
-        elif mode_cache[0] == "EXIT":
-            display.exit_game()
-            exit()
+            case "SETTINGS":
+                pass
+
+            case "CONFIRM_EXIT":
+                display.confirm_exit()
+                answer = input(">>> ")
+
+                if answer == 'Y':
+                    mode = "EXIT"
+
+                elif answer in ("N", "n"):
+                    mode = "MENU"
+
+            case "EXIT":
+                display.exit_game()
+                quit()
+                
         
 
             
