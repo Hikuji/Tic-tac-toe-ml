@@ -135,7 +135,7 @@ def exit_game():
 def rules():
     """
         Displays the rules and gameplay instructions for the Tic-Tac-Toe-ML game.
-        Explains symbol selection, turn order, board input, and AI mechanics.
+        Explains symbol selection, turn order, board input, color coding, and game objectives.
     """
 
     clear()
@@ -153,13 +153,27 @@ def rules():
     print("   To place your symbol, enter the corresponding number of an empty cell.")
     print("   You cannot place a symbol on a cell that is already occupied.")
     print()
-    
-    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}3.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}THE SELF-LEARNING AI{colorama.Style.RESET_ALL}")
-    print("   After each of your turns, the AI will process and choose its move.")
-    print("   The board will update immediately, showing the newly placed symbols.")
+
+    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}3.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}INTERFACE COLORS{colorama.Style.RESET_ALL}")
+    print(f"   To help you track the game, the board uses clear color coding:")
+    print(f"   - Your moves will always appear in {colorama.Fore.GREEN}GREEN{colorama.Style.RESET_ALL}.")
+    print(f"   - The AI's moves will always appear in {colorama.Fore.BLUE}BLUE{colorama.Style.RESET_ALL}.")
+    print("   - Available empty cells are marked with yellow numbers.")
+    print()
+
+    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}4.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}HOW TO WIN{colorama.Style.RESET_ALL}")
+    print("   Your goal is to place three of your symbols in a horizontal,")
+    print("   vertical, or diagonal row before the AI does.")
+    print("   If all 9 cells are filled without a three-in-a-row, the game ends in a draw.")
     print()
     
-    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}4.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}CUSTOMIZATION{colorama.Style.RESET_ALL}")
+    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}5.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}THE SELF-LEARNING AI{colorama.Style.RESET_ALL}")
+    print("   You are playing against an artificial intelligence that learns from experience.")
+    print("   It analyzes past matches, adapts to your strategy, and traps you if you make a mistake.")
+    print("   The more games you play, the smarter and more challenging it becomes.")
+    print()
+    
+    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}6.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}CUSTOMIZATION{colorama.Style.RESET_ALL}")
     print("   You can adjust visual and stylistic aspects of the interface")
     print("   at any time inside the Settings menu.")
     print()
@@ -167,6 +181,7 @@ def rules():
     line()
     print()
     input(f"Press {colorama.Fore.CYAN}Enter{colorama.Style.RESET_ALL} to return to the menu...")
+
 
 
 
