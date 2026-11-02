@@ -10,8 +10,8 @@ settings_file = settings_dir + "/settings.json"
 stats_file = data_dir + "/stats.json"
 memory = ai_memory_dir + "/memory.json"
 
-dirs = [settings_dir, ai_memory_dir]
-files = [settings_file, stats_file, memory]
+dirs = [ai_memory_dir, settings_dir]
+files = [stats_file, memory, settings_file]
 
 
 reset = Fore.WHITE + Style.BRIGHT

@@ -83,12 +83,11 @@ def menu():
     print(f"{colorama.Fore.CYAN}1{colorama.Style.RESET_ALL}. Play")
     print(f"{colorama.Fore.CYAN}2{colorama.Style.RESET_ALL}. Rules")
     print(f"{colorama.Fore.CYAN}3{colorama.Style.RESET_ALL}. base.statistics")
-    print(f"{colorama.Fore.CYAN}4{colorama.Style.RESET_ALL}. Settings")
-    print(f"{colorama.Fore.CYAN}5{colorama.Style.RESET_ALL}. Exit")
+    print(f"{colorama.Fore.CYAN}4{colorama.Style.RESET_ALL}. Exit")
 
     line(40)
     print()
-    print(f"Choose an option by entering the corresponding number (1-5).")
+    print(f"Choose an option by entering the corresponding number (1-4).")
     print()
 
 
@@ -171,11 +170,6 @@ def rules():
     print("   You are playing against an artificial intelligence that learns from experience.")
     print("   It analyzes past matches, adapts to your strategy, and traps you if you make a mistake.")
     print("   The more games you play, the smarter and more challenging it becomes.")
-    print()
-    
-    print(f"{colorama.Fore.BLACK + colorama.Style.BRIGHT}6.{colorama.Style.RESET_ALL} {colorama.Fore.YELLOW}CUSTOMIZATION{colorama.Style.RESET_ALL}")
-    print("   You can adjust visual and stylistic aspects of the interface")
-    print("   at any time inside the Settings menu.")
     print()
     
     line()

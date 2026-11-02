@@ -47,7 +47,7 @@ def main():
                         try:
                             choice = int(input(">>> "))
                     
-                            if choice not in range(1, 6):
+                            if choice not in range(1, 5):
                                 raise ValueError
                     
                         except ValueError:
@@ -67,7 +67,7 @@ def main():
                                 mode = "STATS"
                                 break
 
-                            case 5:
+                            case 4:
                                 mode = "CONFIRM_EXIT"
                                 break
 
@@ -113,12 +113,6 @@ def main():
                     board.board[1][move] = symbol
                     board.board[0][move] = colorama.Style.BRIGHT + colorama.Fore.GREEN
 
-                    display.clear()
-                    print(f"{colorama.Style.BRIGHT}Your turn.{colorama.Style.RESET_ALL}")
-                    display.board(board.schema)
-
-                    sleep(2)
-
                     status = game.check_board(board.board[1])
 
                     if status is not None:
@@ -150,12 +144,6 @@ def main():
                         sleep(1)
                     print()
 
-                    display.clear()
-                    print(f"{colorama.Style.BRIGHT}AI turn.{colorama.Style.RESET_ALL}")
-                    display.board(board.schema)
-
-                    sleep(2)
-
                     status = game.check_board(board.board[1])
 
                     if status is not None:
@@ -183,9 +171,6 @@ def main():
                 case "STATS":
                     display.stats()
                     mode = "MENU"
-
-                case "SETTINGS":
-                    pass
 
                 case "CONFIRM_EXIT":
                     display.confirm_exit()

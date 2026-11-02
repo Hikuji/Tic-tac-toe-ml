@@ -30,7 +30,7 @@ def create_stats_file():
             - draws: 0
     """
 
-    file = base.files[1]
+    file = base.files[0]
     if not exists(file):
         json_data = {
             "total_games": 0,
@@ -51,7 +51,7 @@ def create_settings_file():
             - board_numbering: True
     """
     
-    file = base.files[0]
+    file = base.files[2]
     if not exists(file):
         json_data = {
             "board_numbering": True,
@@ -66,7 +66,7 @@ def create_memory_file():
         Creates a memory.json file in the memory directory if it does not already exist.
     """
 
-    file = base.files[2]
+    file = base.files[1]
     if not exists(file):
         json_data = {}
         with open(file, "w") as f:
@@ -75,12 +75,12 @@ def create_memory_file():
 
 def get_settings():
 
-    with open(base.files[0], "r") as f:
+    with open(base.files[2], "r") as f:
         base.settings = load(f)
 
 
 def save_settings(settings):
-    with open(base.files[0], "w") as f:
+    with open(base.files[2], "w") as f:
         dump(settings, f, indent=4)
 
 
@@ -109,7 +109,7 @@ def load_stats():
             dict: A dictionary containing the loaded base.statistics.
     """
 
-    with open(base.files[1], "r") as f:
+    with open(base.files[0], "r") as f:
         base.statistics = load(f)
 
 
@@ -132,5 +132,5 @@ def save_stats(result, player):
 
     base.statistics["total_games"] += 1
 
-    with open(base.files[1], "w") as f:
+    with open(base.files[0], "w") as f:
         dump(base.statistics, f, indent=4)
