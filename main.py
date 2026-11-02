@@ -85,7 +85,7 @@ def main():
 
                 case "PLAYER":
                     display.clear()
-                    print(f"{colorama.Style.BRIGHT}Your turn.{colorama.Style.RESET_ALL}")
+                    print(f"{colorama.Style.BRIGHT}Your turn ({symbol}).{colorama.Style.RESET_ALL}")
                     display.board(board.schema)
 
                     while True:
@@ -128,7 +128,7 @@ def main():
 
                 case "AI":
                     display.clear()
-                    print(f"{colorama.Style.BRIGHT}AI turn.{colorama.Style.RESET_ALL}")
+                    print(f"{colorama.Style.BRIGHT}AI turn ({ai_symbol}).{colorama.Style.RESET_ALL}")
                     display.board(board.schema)
 
                     game_data[1].append(ai.convert(board.board[1]))
