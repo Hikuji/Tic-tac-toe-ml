@@ -82,7 +82,7 @@ def menu():
 
     print(f"{colorama.Fore.CYAN}1{colorama.Style.RESET_ALL}. Play")
     print(f"{colorama.Fore.CYAN}2{colorama.Style.RESET_ALL}. Rules")
-    print(f"{colorama.Fore.CYAN}3{colorama.Style.RESET_ALL}. base.statistics")
+    print(f"{colorama.Fore.CYAN}3{colorama.Style.RESET_ALL}. statistics")
     print(f"{colorama.Fore.CYAN}4{colorama.Style.RESET_ALL}. Exit")
 
     line(40)
@@ -97,7 +97,7 @@ def stats():
     """
 
     clear()
-    box("base.statistics")
+    box("statistics")
     line()
 
     print(f"Total games played: {colorama.Fore.BLUE + colorama.Style.BRIGHT}{base.statistics["total_games"]}{colorama.Style.RESET_ALL}")
