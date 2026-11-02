@@ -177,7 +177,7 @@ def save_game(data, board):
     elif result == 2:
         base_points = 10
     elif result == 1:
-        base_points = 2
+        base_points = 0.5
     else:
         base_points = 0
 
