@@ -1,5 +1,4 @@
-from ..data.base import reset
-from .data import load_stats
+from ..data import base
 import colorama
 import os
 
@@ -74,7 +73,7 @@ def welcome():
 
 def menu():
     """
-        Displays the main menu for the Tic-Tac-Toe-ML game, allowing the player to choose between starting a game, viewing statistics, or exiting.
+        Displays the main menu for the Tic-Tac-Toe-ML game, allowing the player to choose between starting a game, viewing base.statistics, or exiting.
     """
 
     clear()
@@ -83,7 +82,7 @@ def menu():
 
     print(f"{colorama.Fore.CYAN}1{colorama.Style.RESET_ALL}. Play")
     print(f"{colorama.Fore.CYAN}2{colorama.Style.RESET_ALL}. Rules")
-    print(f"{colorama.Fore.CYAN}3{colorama.Style.RESET_ALL}. Statistics")
+    print(f"{colorama.Fore.CYAN}3{colorama.Style.RESET_ALL}. base.statistics")
     print(f"{colorama.Fore.CYAN}4{colorama.Style.RESET_ALL}. Settings")
     print(f"{colorama.Fore.CYAN}5{colorama.Style.RESET_ALL}. Exit")
 
@@ -95,17 +94,17 @@ def menu():
 
 def stats():
     """
-        Displays the statistics for the Tic-Tac-Toe-ML game, including total games played, player wins, and AI wins.
+        Displays the base.statistics for the Tic-Tac-Toe-ML game, including total games played, player wins, and AI wins.
     """
 
     clear()
-    box("Statistics")
+    box("base.statistics")
     line()
 
-    stats = load_stats()
-    print(f"Total games played: {colorama.Fore.BLUE + colorama.Style.BRIGHT}{stats['total_games']}{colorama.Style.RESET_ALL}")
-    print(f"Player wins: {colorama.Fore.GREEN + colorama.Style.BRIGHT}{stats['player_wins']}{colorama.Style.RESET_ALL}")
-    print(f"AI wins: {colorama.Fore.RED + colorama.Style.BRIGHT}{stats['ai_wins']}{colorama.Style.RESET_ALL}")
+    print(f"Total games played: {colorama.Fore.BLUE + colorama.Style.BRIGHT}{base.statistics["total_games"]}{colorama.Style.RESET_ALL}")
+    print(f"Player wins: {colorama.Fore.GREEN + colorama.Style.BRIGHT}{base.statistics["player_wins"]}{colorama.Style.RESET_ALL}")
+    print(f"AI wins: {colorama.Fore.RED + colorama.Style.BRIGHT}{base.statistics["ai_wins"]}{colorama.Style.RESET_ALL}")
+    print(f"Draws: {colorama.Fore.YELLOW}{base.statistics["draws"]}{colorama.Style.RESET_ALL}")
 
     line()
     print()
@@ -178,9 +177,9 @@ def board(board):
         Args:
             board (list): The game board to be displayed.
     """
-    print(reset, end="")
+    print(base.reset, end="")
     for i in board:
-        print(reset, end="")
+        print(base.reset, end="")
         print(i)
     print()
 
@@ -196,7 +195,7 @@ def game_start():
 
 
 
-def win(winner, player_symbol, name):
+def win(boardd, winner, player_symbol = None, name = None):
     """
         Displays a winning message if the player wins the game.
 
@@ -206,9 +205,33 @@ def win(winner, player_symbol, name):
             name (str): The name of the AI.
     """
 
+    clear()
+
+    board(boardd)
+    print()
     line()
-    if winner == player_symbol:
+    if winner == "draw":
+        print(f"{colorama.Fore.YELLOW}DRAW!{colorama.Style.RESET_ALL}")
+    elif winner == player_symbol:
         print(f"{colorama.Fore.GREEN}Congratulations! You win as {winner}!{colorama.Style.RESET_ALL}")
     else:
         print(f"{colorama.Fore.RED}Game over! {name} ({winner}) wins!{colorama.Style.RESET_ALL}")
     line()
+    print()
+    input(f"Press {colorama.Fore.CYAN}Enter{colorama.Style.RESET_ALL} to return to the menu...")
+
+
+def flush_input():
+    """
+        Flushes the standard input buffer to prevent pre-typed characters 
+        from automatically submitting subsequent input prompts.
+    """
+    try:
+        import msvcrt
+        while msvcrt.kbhit():
+            msvcrt.getch()
+    except ImportError:
+        import sys
+        import termios
+        termios.tcflush(sys.stdin, termios.TCIFLUSH)
+

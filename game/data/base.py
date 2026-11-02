@@ -16,6 +16,11 @@ files = [settings_file, stats_file, memory]
 
 reset = Fore.WHITE + Style.BRIGHT
 
+
+settings = {}
+statistics = {}
+
+
 class Board:
     def __init__(self):
         self.board = [
@@ -27,22 +32,24 @@ class Board:
             ]
         ]
 
-        self.inschema = [
+    @property
+    def schema(self):
+        inschema = [
             f"{self.board[0][i]}{self.board[1][i]}{reset}" for i in range(9)
         ]
 
-        self.schema = [
+        return [
             "+-------+-------+-------+",
             "|       |       |       |",
-            f"|   {self.inschema[0]}   |   {self.inschema[1]}   |   {self.inschema[2]}   |",
-            "|       |       |       |",
-            "+-------+-------+-------+",
-            "|       |       |       |",
-            f"|   {self.inschema[3]}   |   {self.inschema[4]}   |   {self.inschema[5]}   |",
+            f"|   {inschema[0]}   |   {inschema[1]}   |   {inschema[2]}   |",
             "|       |       |       |",
             "+-------+-------+-------+",
             "|       |       |       |",
-            f"|   {self.inschema[6]}   |   {self.inschema[7]}   |   {self.inschema[8]}   |",
+            f"|   {inschema[3]}   |   {inschema[4]}   |   {inschema[5]}   |",
+            "|       |       |       |",
+            "+-------+-------+-------+",
+            "|       |       |       |",
+            f"|   {inschema[6]}   |   {inschema[7]}   |   {inschema[8]}   |",
             "|       |       |       |",
             "+-------+-------+-------+"
         ]
